@@ -3,6 +3,7 @@ package Model;
 import DataStructures.Dijkstra;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import Utilities.Printing;
 
 import javax.swing.*;
 import java.awt.*;
@@ -120,18 +121,18 @@ public class JsonModel {
             for (int j = 0; j < connections.size(); j++) {
                 end = connections.get(j);
                 path = Dijkstra.findPath(auxConnections, rooms, origin, end);
-                displayPaths(path, origin, end);
+                Printing.displayPaths(path, origin, end);
             }
         }
+    }
 
+    public void getBTree(){
 
     }
 
-    private void displayPaths(ArrayList<Room> path, Connection origin, Connection end) {
-        System.out.println("Origin " + origin);
-        for (int i = 0; i < path.size(); i++) {
-            System.out.println(" -> " + path.get(i).getRoom_name());
-        }
-        System.out.println(" -> " + end);
+
+    public void getRTree(){
+
     }
+
 }

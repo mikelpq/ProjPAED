@@ -46,4 +46,30 @@ public class BTreeNode {
     public int getNumElements() {
         return numElements;
     }
+
+
+    public void insert(Product product){
+        for (int i = 0; i < elements.length; i++) {
+            if (product.getPrice() < elements[i].getPrice()){
+                if (numElements < 3){
+                    int index = i;
+                    moveAndInsertElements(index, product);
+                }else{
+                    //rotate tree
+                }
+            }
+        }
+    }
+
+    private void moveAndInsertElements(int index, Product product) {
+        Product tmp;
+        for (int i = numElements-1; i > index; i--) {
+            elements[i+1] = elements[i];
+        }
+        elements[index] = product;
+    }
+
+    public static void main(String[] args) {
+
+    }
 }

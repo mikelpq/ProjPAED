@@ -2,9 +2,10 @@ package DataStructures.BTree;
 
 import Model.Product;
 
+
+/** implementation a 2-3 Tree based on a B-Tree **/
 public class BTree {
     private BTreeNode root;
-
 
     public BTree(){
         this.root = null;
@@ -14,22 +15,11 @@ public class BTree {
     public void insert(Product element){
         if (root == null){
             root = new BTreeNode();
-
+            root.insert(element);
         }
     }
 
-    private void checkWhereToAdd(Product product, BTreeNode node){
-        for (int i = 0; i < node.getElements().length; i++) {
-            if (product.getPrice() < node.getElements()[i].getPrice()){
-                if (node.getNumElements() < 3){
-                    //move elements
-                    //update num elements of node
-                }else{
-                    //rotate tree
-                }
-            }
-        }
-    }
+
     /** END OF INSERT FUNCTION **/
 
 
