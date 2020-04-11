@@ -12,7 +12,15 @@ public class BTreeNode {
 
 
     public BTreeNode(){
-        this.elements = new Product[3];
+        this.elements = new Product[2];
+        this.right_son = null;
+        this.left_son = null;
+        this.mid_son = null;
+    }
+
+    public BTreeNode(Product product){
+        this.elements = new Product[2];
+        this.elements[0] = product;
         this.right_son = null;
         this.left_son = null;
         this.mid_son = null;
@@ -71,5 +79,13 @@ public class BTreeNode {
 
     public static void main(String[] args) {
 
+    }
+
+    public void insertElementIntoNode(Product element) {
+        //si node no esta buit
+        if (elements[0] != null){
+            elements[1] = elements[0];
+        }
+        elements[0] = element;
     }
 }
