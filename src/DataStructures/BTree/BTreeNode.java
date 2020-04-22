@@ -11,24 +11,14 @@ public class BTreeNode {
     private int numElements;
 
 
-    public BTreeNode(){
-        this.elements = new Product[2];
-        this.right_son = null;
-        this.left_son = null;
-        this.mid_son = null;
-    }
-
-    public BTreeNode(Product product){
+    public BTreeNode(Product product, BTreeNode father){
         this.elements = new Product[2];
         this.elements[0] = product;
+        this.father = father;
         this.right_son = null;
         this.left_son = null;
         this.mid_son = null;
-    }
-
-    public BTreeNode(BTreeNode father){
-        this.elements = new Product[3];
-        this.father = father;
+        this.numElements = 1;
     }
 
     public BTreeNode getFather() {
@@ -56,25 +46,14 @@ public class BTreeNode {
     }
 
 
-    public void insert(Product product){
-        for (int i = 0; i < elements.length; i++) {
-            if (product.getPrice() < elements[i].getPrice()){
-                if (numElements < 3){
-                    int index = i;
-                    moveAndInsertElements(index, product);
-                }else{
-                    //rotate tree
-                }
-            }
-        }
-    }
-
-    private void moveAndInsertElements(int index, Product product) {
+    public void insert( Product product) {
         Product tmp;
-        for (int i = numElements-1; i > index; i--) {
-            elements[i+1] = elements[i];
+        if (product.getPrice() < elements[0].getPrice()){
+            elements[1] = elements[0];
+            elements[0] = product;
+        }else{
+            elements[1] = product;
         }
-        elements[index] = product;
     }
 
     public static void main(String[] args) {

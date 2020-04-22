@@ -1,9 +1,9 @@
 package Model;
 
-import DataStructures.Dijkstra;
+import DataStructures.BTree.BTree;
+import DataStructures.Dijkstra.Dijkstra;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import Utilities.Printing;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class JsonModel {
 
@@ -110,23 +111,43 @@ public class JsonModel {
         return connections;
     }
 
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    public ArrayList<Position> getPositions() {
+        return positions;
+    }
+
     public void getGraphDijsktra(){
-        ArrayList<Room> path = new ArrayList<>();
-        Connection origin, end;
-
-        ArrayList<Connection> auxConnections = new ArrayList<>(connections);
-
-        for (int i = 0; i < connections.size(); i++) {
-            origin = connections.get(i);
-            for (int j = 0; j < connections.size(); j++) {
-                end = connections.get(j);
-                path = Dijkstra.findPath(auxConnections, rooms, origin, end);
-                Printing.displayPaths(path, origin, end);
+        Room inici = new Room();
+        Room desti = new Room();
+        Scanner sc;
+        System.out.println("Inicio:");
+        sc = new Scanner(System.in);
+        String inicio = sc.nextLine();
+        System.out.println("Destino:");
+        sc = new Scanner(System.in);
+        String destino = sc.nextLine();
+        for (Room room: rooms){
+            if (inicio.equals(room.getRoom_name())) {
+                inici = room;
+            }
+            if (destino.equals(room.getRoom_name())) {
+                desti = room;
             }
         }
+        Dijkstra dijkstra = new Dijkstra();
+        dijkstra.setNumberOfVertices(room.length);
+        dijkstra.llenarListaAdjacenia(connection,room);
+        dijkstra.dijkstra(inici,desti);
     }
 
     public void getBTree(){
+        BTree bTree = new BTree();
+        for (int i = 0; i < products.size(); i++) {
+            bTree.insert(products.get(i));
+        }
 
     }
 
