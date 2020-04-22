@@ -1,31 +1,33 @@
 package Model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class Room {
-    @SerializedName("id")
-    @Expose
     private int id;
-    @SerializedName("room_name")
-    @Expose
     private String room_name;
-    private Boolean visited;
+
+    public Room() {
+    }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getRoom_name() {
         return room_name;
     }
 
-    public Boolean getVisited() {
-        return visited;
+    public void setRoom_name(String room_name) {
+        this.room_name = room_name;
     }
 
-    public void setVisited(Boolean visited) {
-        this.visited = visited;
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", room_name='" + room_name + '\'' +
+                '}';
     }
-
 }

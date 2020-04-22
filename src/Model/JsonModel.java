@@ -144,7 +144,16 @@ public class JsonModel {
     }
 
     public void getBTree(){
+
         BTree bTree = new BTree();
+        int option = 0;
+
+        while (!option){
+            System.out.println("[SYS] ");
+        }
+
+
+        bTree.BtreeMenu();
         for (int i = 0; i < products.size(); i++) {
             bTree.insert(products.get(i));
         }
