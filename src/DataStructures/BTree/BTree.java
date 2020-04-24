@@ -2,6 +2,8 @@ package DataStructures.BTree;
 
 import Model.Product;
 
+import java.util.Scanner;
+
 /** implementation a 2-3 Tree based on a B-Tree **/
 /** OPERATIONS
  *
@@ -27,18 +29,83 @@ public class BTree {
         this.root = null;
     }
 
-    public void BtreeMenu(String option, Product product){
+    public void BtreeMenu(int option, Product[] products){
+        int index;
+        //index -> element to remove or search
         switch (option){
-            case "insert":
-                insert(product);
+            case 1:
+                for (int i = 0; i < products.length; i++) {
+                    insert(products[i]);
+                }
                 break;
-            case "remove":
-                remove(product);
+
+            case 2:
+                Product product = getData();
                 break;
-            case "search":
-                search(product);
+
+            case 3:
+                index = getElement(products);
+
+                if (index == -1){
+                    System.out.println("[ERR] Objecte no trobat");
+                }else{
+                    remove(products[index]);
+                }
                 break;
+
+            case 4:
+                index = getElement(products);
+
+                if (index == -1){
+                    System.out.println("[ERR] Objecte no trobat");
+                }else{
+                    search(products[index]);
+                }
+                break;
+
+            case 5:
+                printStructure();
+                break;
+
+            default:
+                if (option != 6){
+                    System.out.println("[ERR] Opcio invalida");
+                }
         }
+    }
+
+
+    //find product
+    private int getElement(Product[] products) {
+        Scanner sc = new Scanner(System.in);
+        String option = "";
+        int res = -1;
+
+        System.out.println("[MENU] Quin element vols eliminar?");
+        option = sc.nextLine();
+
+        for (int i = 0; i < products.length; i++) {
+            if (option.equals(products[i].getName())){
+                res = i;
+            }
+        }
+        return res;
+    }
+
+    //insert custom product, not from dataset
+    private Product getData() {
+        Scanner sc = new Scanner(System.in);
+        Product product;
+
+        System.out.println("[MENU] Nom del producte?");
+        String name = sc.nextLine();
+        System.out.println("[MENU] Preu del producte (enter)?");
+        int price = sc.nextInt();
+
+        product = new Product(name, price);
+
+
+        return product;
     }
 
     /** INSERT FUNCTION **/
@@ -55,23 +122,23 @@ public class BTree {
             insertNode(product, current.getLeft_son());
         }
 
-        inOrderInsert(product, current);
+        insertElementIntoNode(product, current);
 
         if (current.getMid_son() != null){
             insertNode(product, current.getMid_son());
         }
 
-        inOrderInsert(product, current);
+        insertElementIntoNode(product, current);
 
         if (current.getRight_son() != null){
             insertNode(product, current.getRight_son());
         }
 
-        inOrderInsert(product, current);
+        insertElementIntoNode(product, current);
 
     }
 
-    private void inOrderInsert(Product product, BTreeNode node){
+    private void insertElementIntoNode(Product product, BTreeNode node){
         if (product.getPrice() < node.getElements()[0].getPrice()) {
             if (node.getNumElements() == 1){
                 node.insert(product);
@@ -116,4 +183,29 @@ public class BTree {
 
     }
     /** END OF SEARCH FUNCTION **/
+
+    /** PRINT STRUCTURE **/
+    private void printStructure() {
+        inOrderPrint(root);
+    }
+
+    private void inOrderPrint(BTreeNode current){
+        if (current.getLeft_son() != null){
+            inOrderPrint(current.getLeft_son());
+        }
+
+        System.out.println("[" + current.getElements()[0].getPrice() + "," + current.getElements()[1].getPrice() + "]");
+
+        if (current.getMid_son() != null){
+            inOrderPrint(current.getMid_son());
+        }
+
+        System.out.println("[" + current.getElements()[0].getPrice() + "," + current.getElements()[1].getPrice() + "]");
+
+        if (current.getRight_son() != null){
+            inOrderPrint(current.getRight_son());
+        }
+
+        System.out.println("[" + current.getElements()[0].getPrice() + "," + current.getElements()[1].getPrice() + "]");
+    }
 }

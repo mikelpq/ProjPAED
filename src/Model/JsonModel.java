@@ -29,6 +29,8 @@ public class JsonModel {
     public JsonModel(){
         readConnections();
         readRooms();
+        readMap();
+        readObjects();
     }
 
     private void readConnections(){
@@ -147,16 +149,17 @@ public class JsonModel {
 
         BTree bTree = new BTree();
         int option = 0;
+        Scanner sc = new Scanner(System.in);
 
-        while (!option){
-            System.out.println("[SYS] ");
+        while (option != 4){
+            System.out.println("[MENU] Quina operació desitges realitzar?");
+            System.out.println("[MENU]\t 1. Inserir dataset.\n[MENU]\t 2. Inserir element.\n[MENU]\t 3. Eliminar element.\n[MENU]\t 4. Buscar element \n[MENU]\t 5. Veure estructura\n[MENU]\t 6. Sortir");
+            option = sc.nextInt();
+            bTree.BtreeMenu(option, product);
         }
 
 
-        bTree.BtreeMenu();
-        for (int i = 0; i < products.size(); i++) {
-            bTree.insert(products.get(i));
-        }
+
 
     }
 
