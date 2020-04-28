@@ -2,7 +2,6 @@ package Model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import javafx.geometry.Pos;
 
 public class Position {
     @SerializedName("id")
@@ -24,6 +23,5 @@ public class Position {
     public Position(){
 
     }
-
 
 }

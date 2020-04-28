@@ -34,16 +34,19 @@ public class BTree {
         //index -> element to remove or search
         switch (option){
             case 1:
+                //INSERIR
                 for (int i = 0; i < products.length; i++) {
                     insert(products[i]);
                 }
                 break;
 
             case 2:
+                //BUSCAR Y ELIMINAR
                 Product product = getData();
                 break;
 
             case 3:
+                //VISUALITZACIO
                 index = getElement(products);
 
                 if (index == -1){

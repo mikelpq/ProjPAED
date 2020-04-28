@@ -2,6 +2,7 @@ package Model;
 
 import DataStructures.BTree.BTree;
 import DataStructures.Dijkstra.Dijkstra;
+import DataStructures.RTree.RTree;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
@@ -17,6 +18,8 @@ public class JsonModel {
 
     private String jsonRoomPath = "data/RoomS.json";
     private String jsonConnectionPath = "data/ConnectionS.json";
+    private String jsonMapPath = "data/dataset_MapS.json";
+    private String jsonObjectPath = "data/dataset_ObjectS.json";
     private Room[] room;
     private Connection[] connection;
     private Product[] product;
@@ -72,7 +75,7 @@ public class JsonModel {
     private void readMap(){
         try{
             Gson gson = new Gson();
-            position = gson.fromJson(new FileReader(jsonRoomPath), Position[].class);
+            position = gson.fromJson(new FileReader(jsonMapPath), Position[].class);
             positions = new ArrayList<>(Arrays.asList(position));
 
         }catch (JsonSyntaxException jse){
@@ -90,7 +93,7 @@ public class JsonModel {
     private void readObjects(){
         try{
             Gson gson = new Gson();
-            product = gson.fromJson(new FileReader(jsonRoomPath), Product[].class);
+            product = gson.fromJson(new FileReader(jsonObjectPath), Product[].class);
             products = new ArrayList<>(Arrays.asList(product));
 
         }catch (JsonSyntaxException jse){
@@ -146,26 +149,60 @@ public class JsonModel {
     }
 
     public void getBTree(){
-
         BTree bTree = new BTree();
         int option = 0;
         Scanner sc = new Scanner(System.in);
 
-        while (option != 4){
+        while (option != 3){
             System.out.println("[MENU] Quina operació desitges realitzar?");
-            System.out.println("[MENU]\t 1. Inserir dataset.\n[MENU]\t 2. Inserir element.\n[MENU]\t 3. Eliminar element.\n[MENU]\t 4. Buscar element \n[MENU]\t 5. Veure estructura\n[MENU]\t 6. Sortir");
+            System.out.println("[MENU]\t 1. Inserir dataset.\n[MENU]\t 2. Buscar y eliminar element.\n[MENU]\t 3. Visualitzar arbre.");
             option = sc.nextInt();
             bTree.BtreeMenu(option, product);
         }
-
-
-
-
     }
 
 
     public void getRTree(){
+        RTree rTree = new RTree();
+        int option = 0;
+        Scanner scanner = new Scanner(System.in);
 
+        while (option != 4){
+            System.out.println("[MENU] Quina operació desitges realitzar?");
+            System.out.println("[MENU]\t 1. Inserir dataset.\n[MENU]\t 2. Buscar y eliminar element.\n[MENU]\t 3. Visualitzar arbre.\n[MENU]\t 4. Atras.");
+            option = scanner.nextInt();
+            rTree.RTreeMenu(option,position);
+        }
+
+    }
+
+    public void printMenu() {
+        int option = 0;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("[MENU] Benvingut a CS:LS\n");
+        while (option != 4){
+            System.out.println("[MENU] Escull una estructura de dades/algorisme:");
+            System.out.println("[MENU]\t 1. Dijkstra.\n[MENU]\t 2. BTree - versió 2-3.\n[MENU]\t 3. R-Tree \n[MENU]\t 4. Salir.");
+            option = sc.nextInt();
+
+            switch (option){
+                case 1:
+                    getGraphDijsktra();
+                    break;
+                case 2:
+                    getBTree();
+                    break;
+                case 3:
+                    getRTree();
+                    break;
+                case 4:
+                    System.out.println("Saliendo del menu...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("[ERR] Opció incorrecta\n");
+            }
+        }
     }
 
 }
