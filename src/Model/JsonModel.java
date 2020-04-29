@@ -76,8 +76,10 @@ public class JsonModel {
         try{
             Gson gson = new Gson();
             position = gson.fromJson(new FileReader(jsonMapPath), Position[].class);
+            for (Position p : position) {
+                p.setArea();
+            }
             positions = new ArrayList<>(Arrays.asList(position));
-
         }catch (JsonSyntaxException jse){
             JOptionPane.showMessageDialog(
                     new Frame(),
@@ -204,5 +206,4 @@ public class JsonModel {
             }
         }
     }
-
 }

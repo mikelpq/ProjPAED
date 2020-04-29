@@ -26,7 +26,13 @@ public class RTree {
                 break;
             case 3:
                 //Visualitzar
-
+                for (Position p : positions) {
+                    System.out.println(p);
+                }
+                Nodo n1 = new Nodo(null,0,0,0, 0, null,null);
+                Nodo n2 = new Nodo(null,0,0,0, 0, null,null);
+                System.out.println(n1);
+                System.out.println(n2);
                 break;
             case 4:
                 JsonModel jsonModel = new JsonModel();
