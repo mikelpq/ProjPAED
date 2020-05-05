@@ -7,11 +7,18 @@ import java.util.Arrays;
 public class Leaf {
     private Nodo father;
     private Position[] positions;
+    private int numLeaf;
+
+    public Leaf(){
+        this.positions = new Position[3];
+        this.numLeaf = 0;
+    }
 
     public Leaf(Nodo father, Position[] positions) {
         this.father = father;
         this.positions = new Position[3];
         this.positions = positions;
+        this.numLeaf = 0;
     }
 
     public Nodo getFather() {
@@ -30,6 +37,14 @@ public class Leaf {
         this.positions = positions;
     }
 
+    public int getNumLeaf() {
+        return numLeaf;
+    }
+
+    public void setNumLeaf(int numLeaf) {
+        this.numLeaf = numLeaf;
+    }
+
     @Override
     public String toString() {
         return "Leaf{" +
@@ -37,4 +52,18 @@ public class Leaf {
                 ", positions=" + Arrays.toString(positions) +
                 '}';
     }
+
+    public void insertLeaf(Position position){
+        if (maxLeaf()){
+            positions[numLeaf] = position;
+            numLeaf++;
+        }else{
+
+        }
+    }
+
+    public boolean maxLeaf(){
+        return numLeaf < 3;
+    }
+
 }

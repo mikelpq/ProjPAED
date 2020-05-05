@@ -6,9 +6,10 @@ import com.sun.tools.javac.Main;
 
 public class RTree {
 
+    private Nodo nodo;
 
     public RTree(){
-
+        nodo = new Nodo();
     }
     public void RTreeMenu(int option, Position[] positions){
         int index;
@@ -16,8 +17,10 @@ public class RTree {
         switch (option){
             case 1:
                 //Inserir
+                Leaf leaf = new Leaf();
+                Nodo nodo = new Nodo();
                 for (int i = 0; i < positions.length; i++) {
-                    //insert(positions[i]);
+                    insert(positions[i], leaf, nodo);
                 }
                 break;
             case 2:
@@ -29,10 +32,6 @@ public class RTree {
                 for (Position p : positions) {
                     System.out.println(p);
                 }
-                Nodo n1 = new Nodo(null,0,0,0, 0, null,null);
-                Nodo n2 = new Nodo(null,0,0,0, 0, null,null);
-                System.out.println(n1);
-                System.out.println(n2);
                 break;
             case 4:
                 JsonModel jsonModel = new JsonModel();
@@ -42,4 +41,16 @@ public class RTree {
                 System.out.println("[ERR] Opcio invalida");
         }
     }
+
+    public void insert(Position position, Leaf leaf, Nodo nodo){
+        int num = 0;
+        if (leaf.maxLeaf()){
+            leaf.getPositions()[leaf.getNumLeaf()] = position;
+            nodo.getFillsFulla()[num] = leaf;
+            leaf.setFather(nodo);
+        }else{
+            num++;
+        }
+    }
+
 }
