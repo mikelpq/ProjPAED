@@ -65,7 +65,6 @@ public class BTree {
                     search(products[index]);
                 }
                 break;
-
             case 5:
                 printStructure();
                 break;

@@ -1,69 +1,45 @@
 package DataStructures.RTree;
 
+import DataStructures.array.Array;
 import Model.Position;
 
-import java.util.Arrays;
-
 public class Leaf {
-    private Nodo father;
-    private Position[] positions;
-    private int numLeaf;
+    private String idFather;
+    private Array<Position> positions;
 
     public Leaf(){
-        this.positions = new Position[3];
-        this.numLeaf = 0;
+        this.positions = new Array<>();
     }
 
-    public Leaf(Nodo father, Position[] positions) {
-        this.father = father;
-        this.positions = new Position[3];
+    public Leaf(String idFather, Array<Position> positions) {
+        if (positions == null){
+            this.positions = new Array<>();
+        }
+        this.idFather = idFather;
         this.positions = positions;
-        this.numLeaf = 0;
     }
 
-    public Nodo getFather() {
-        return father;
+    public String getIdFather() {
+        return idFather;
     }
 
-    public void setFather(Nodo father) {
-        this.father = father;
+    public void setIdFather(String idFather) {
+        this.idFather = idFather;
     }
 
-    public Position[] getPositions() {
+    public Array<Position> getPositions() {
         return positions;
     }
 
-    public void setPositions(Position[] positions) {
+    public void setPositions(Array<Position> positions) {
         this.positions = positions;
-    }
-
-    public int getNumLeaf() {
-        return numLeaf;
-    }
-
-    public void setNumLeaf(int numLeaf) {
-        this.numLeaf = numLeaf;
     }
 
     @Override
     public String toString() {
         return "Leaf{" +
-                "father=" + father +
-                ", positions=" + Arrays.toString(positions) +
+                "father=" + idFather +
+                ", positions=" + positions +
                 '}';
     }
-
-    public void insertLeaf(Position position){
-        if (maxLeaf()){
-            positions[numLeaf] = position;
-            numLeaf++;
-        }else{
-
-        }
-    }
-
-    public boolean maxLeaf(){
-        return numLeaf < 3;
-    }
-
 }

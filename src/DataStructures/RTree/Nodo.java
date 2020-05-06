@@ -1,9 +1,7 @@
 package DataStructures.RTree;
 
-import Model.Position;
+import DataStructures.array.Array;
 
-import java.io.PipedOutputStream;
-import java.util.Arrays;
 
 public class Nodo {
     private Nodo father;
@@ -14,17 +12,15 @@ public class Nodo {
     private int y1;
     private int y2;
     private int area;
-    private int numNodo;
-    private Leaf[] fillsFulla;
-    private Nodo[] fillsNodo;
+    private Leaf fillsFulla;
+    private Array<Nodo> fillsNodo;
 
     public Nodo(){
         increment++;
         this.id = "R" + increment;
-        this.numNodo = 0;
     }
 
-    public Nodo(Nodo father, int x1, int x2, int y1, int y2, Leaf[] fillsFulla, Nodo[] fillsNodo) {
+    public Nodo(Nodo father, int x1, int x2, int y1, int y2, Leaf fillsFulla, Array<Nodo> fillsNodo) {
         this.father = father;
         increment++;
         this.id = "R" + increment;
@@ -32,7 +28,7 @@ public class Nodo {
         this.x2 = x2;
         this.y1 = y1;
         this.y2 = y2;
-        this.numNodo = 0;
+        this.fillsNodo = new Array<>();
         this.fillsFulla = fillsFulla;
         this.fillsNodo = fillsNodo;
     }
@@ -61,11 +57,11 @@ public class Nodo {
         this.y2 = y2;
     }
 
-    public void setFillsFulla(Leaf[] fillsFulla) {
+    public void setFillsFulla(Leaf fillsFulla) {
         this.fillsFulla = fillsFulla;
     }
 
-    public void setFillsNodo(Nodo[] fillsNodo) {
+    public void setFillsNodo(Array<Nodo> fillsNodo) {
         this.fillsNodo = fillsNodo;
     }
 
@@ -105,34 +101,18 @@ public class Nodo {
         return y2;
     }
 
-    public Leaf[] getFillsFulla() {
+    public Leaf getFillsFulla() {
         return fillsFulla;
     }
 
-    public Nodo[] getFillsNodo() {
+    public Array<Nodo> getFillsNodo() {
         return fillsNodo;
-    }
-
-    public int getNumNodo() {
-        return numNodo;
-    }
-
-    public void setNumNodo(int numNodo) {
-        this.numNodo = numNodo;
     }
 
     private int calculateArea() {
         int base = Math.abs(x1-x2);
         int altura = Math.abs(y1-y2);
         return (base * altura) / 2;
-    }
-
-    private double calcularDistanciaDerecha(Position n1, Position n2){
-        int x2 = n1.getX2();
-        int y2 = n1.getY2();
-        int x1 = n2.getX1();
-        int y1 = n2.getY1();
-        return Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
     }
 
     @Override
@@ -145,8 +125,9 @@ public class Nodo {
                 ", y1=" + y1 +
                 ", y2=" + y2 +
                 ", area=" + area +
-                ", fillsFulla=" + Arrays.toString(fillsFulla) +
-                ", fillsNodo=" + Arrays.toString(fillsNodo) +
+                ", fillsFulla=" + fillsFulla +
+                ", fillsNodo=" + fillsNodo +
                 '}';
     }
+
 }
